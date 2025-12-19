@@ -89,7 +89,10 @@ async fn get_badge(
                 }
             }
         }
-        Err(_) => "offline".to_string(),
+        Err(e) => {
+            eprintln!("Request error: {}", e);
+            "offline".to_string()
+        }
     };
 
     // Mapping logic remains the same
