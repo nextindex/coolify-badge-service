@@ -1,7 +1,7 @@
+use axum::http::{HeaderMap, StatusCode, header};
 use axum::{
     Router,
     extract::{Path, State},
-    http::{StatusCode, header},
     response::IntoResponse,
     routing::get,
 };
@@ -108,6 +108,18 @@ async fn get_badge(
     let status_text_width = (status.len() * 8).max(40);
     let total_width = 50 + status_text_width;
     let status_center_x = 50 + (status_text_width / 2);
+    let now = httpdate::fmt_http_date(std::time::SystemTime::now());
+    let mut headers = HeaderMap::new();
+    headers.insert(header::CONTENT_TYPE, "image/svg+xml".parse().unwrap());
+    headers.insert(
+        header::CACHE_CONTROL,
+        "no-cache, no-store, must-revalidate, proxy-revalidate"
+            .parse()
+            .unwrap(),
+    );
+    headers.insert(header::PRAGMA, "no-cache".parse().unwrap());
+    headers.insert(header::EXPIRES, "0".parse().unwrap());
+    headers.insert(header::LAST_MODIFIED, now.parse().unwrap());
 
     let svg = format!(
         r##"<svg xmlns="http://www.w3.org/2000/svg" width="{total_width}" height="20">
@@ -137,12 +149,5 @@ async fn get_badge(
         status = status
     );
 
-    (
-        StatusCode::OK,
-        [
-            (header::CONTENT_TYPE, "image/svg+xml"),
-            (header::CACHE_CONTROL, "no-cache, no-store, must-revalidate"),
-        ],
-        svg,
-    )
+    (StatusCode::OK, headers, svg)
 }
