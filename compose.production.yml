@@ -11,6 +11,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.coolify-badge.rule=Host(`${coolify.domain}`)"
       - "traefik.http.services.coolify-badge.loadbalancer.server.port=3000"
+      - "traefik.http.services.coolify-badge.loadbalancer.healthcheck.path=/health"
+      - "traefik.http.services.coolify-badge.loadbalancer.healthcheck.interval=10s"
+      - "traefik.http.services.coolify-badge.loadbalancer.healthcheck.timeout=2s"
     expose:
       - "3000"
     read_only: true

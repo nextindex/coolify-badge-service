@@ -42,6 +42,7 @@ async fn main() {
 
     let app = Router::new()
         .route("/", get(|| async { "Badge service is alive!" }))
+        .route("/health", get(|| async { (StatusCode::OK, "OK") }))
         .route("/badge/:app_uuid", get(get_badge))
         .with_state(state);
 
