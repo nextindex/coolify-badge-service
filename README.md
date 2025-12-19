@@ -17,11 +17,13 @@ Ensure you have the Rust toolchain installed.
 
 1. Clone the project and navigate into the directory.
 2. Create a .env file with the following content:
+```
    COOLIFY_URL=https://app.coolify.io
    API_TOKEN=your_coolify_api_token
    PORT=3000
+ ```
 3. Run the service:
-   cargo run
+   `cargo run`
 
 ### 2. Build with Docker
 The included Dockerfile produces a minimal, hardened production image.
