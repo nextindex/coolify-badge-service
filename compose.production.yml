@@ -17,6 +17,8 @@ services:
     expose:
       - "3000"
     read_only: true
+    networks:
+      - coolify
     security_opt:
       - no-new-privileges:true
     deploy:
@@ -24,3 +26,7 @@ services:
         limits:
           memory: 32M
           cpus: "0.1"
+
+networks:
+  coolify:
+    external: true

@@ -74,7 +74,8 @@ async fn get_badge(
                 "unauthorized".to_string()
             } else {
                 // Parse into our new wrapper structure
-                match resp.json::<CoolifyResponse>().await {
+                let body_text = resp.text().await.unwrap_or_default();
+                match serde_json::from_str::<CoolifyResponse>(&body_text) {
                     Ok(data) => data
                         .deployments
                         .first()
@@ -82,6 +83,7 @@ async fn get_badge(
                         .unwrap_or_else(|| "no_history".to_string()),
                     Err(e) => {
                         eprintln!("JSON Parsing error: {}", e);
+                        eprintln!("Response body: {}", body_text);
                         "parse_error".to_string()
                     }
                 }
