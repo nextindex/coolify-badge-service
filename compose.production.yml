@@ -7,6 +7,8 @@ services:
       - COOLIFY_URL=${COOLIFY_URL}
       - API_TOKEN=${API_TOKEN}
       - PORT=${PORT:-3000}
+    expose:
+      - ${PORT:-3000}
     read_only: true
     security_opt:
       - no-new-privileges:true

@@ -9,6 +9,7 @@ services:
       - PORT=${PORT:-3000}
     ports:
       - "${PORT:-3000}:${PORT:-3000}"
+
     read_only: true
     security_opt:
       - no-new-privileges:true
