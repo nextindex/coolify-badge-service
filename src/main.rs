@@ -31,7 +31,7 @@ async fn main() {
     dotenv().ok();
     let state = Arc::new(AppState {
         client: Client::new(),
-        coolify_url: std::env::var("COOLIFY_URL").expect("COOLIFY_URL must be set"),
+        coolify_url: std::env::var("COOLIFY_API_URL").expect("COOLIFY_API_URL must be set"),
         api_token: std::env::var("API_TOKEN").expect("API_TOKEN must be set"),
     });
 

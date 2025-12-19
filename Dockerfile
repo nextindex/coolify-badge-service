@@ -15,7 +15,7 @@ COPY --from=builder /app/target/release/coolify-badge /app/badge-service
 
 USER 1000
 
-ENV COOLIFY_URL=""
+ENV COOLIFY_API_URL=""
 ENV API_TOKEN=""
 ENV PORT=3000
 
