@@ -1,3 +1,5 @@
+![Deployment Status](https://badge.coolify.nxi.io/badge/a40owkkc4o08c48ccc8g8csw)
+
 # Coolify Deployment Badge Service
 
 A lightweight, high-performance, and secure microservice written in Rust that generates live-updating SVG status badges for applications hosted on Coolify.
