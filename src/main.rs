@@ -41,6 +41,7 @@ async fn main() {
         .expect("PORT must be a valid number");
 
     let app = Router::new()
+        .route("/", get(|| async { "Badge service is alive!" }))
         .route("/badge/:app_uuid", get(get_badge))
         .with_state(state);
 
