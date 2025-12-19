@@ -7,6 +7,12 @@ services:
       - COOLIFY_URL=${COOLIFY_URL}
       - API_TOKEN=${API_TOKEN}
       - PORT=${PORT:-3000}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.coolify-badge.rule=Host(`${coolify.domain}`)"
+      - "traefik.http.services.coolify-badge.loadbalancer.server.port=3000"
+    expose:
+      - "3000"
     read_only: true
     security_opt:
       - no-new-privileges:true
@@ -15,8 +21,3 @@ services:
         limits:
           memory: 32M
           cpus: "0.1"
-    healthcheck:
-      test: ["CMD-SHELL", "sleep 0"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
