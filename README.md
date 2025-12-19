@@ -20,7 +20,7 @@ Ensure you have the Rust toolchain installed.
 1. Clone the project and navigate into the directory.
 2. Create a .env file with the following content:
 ```
-   COOLIFY_URL=https://app.coolify.io
+   COOLIFY_API_URL=https://app.coolify.io
    API_TOKEN=your_coolify_api_token
    PORT=3000
  ```
@@ -46,7 +46,7 @@ services:
     container_name: coolify-badge-service
     restart: always
     environment:
-      - COOLIFY_URL=${COOLIFY_URL}
+      - COOLIFY_API_URL=${COOLIFY_API_URL}
       - API_TOKEN=${API_TOKEN}
       - PORT=${PORT:-3000}
     ports:
